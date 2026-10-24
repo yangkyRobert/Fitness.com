@@ -2,58 +2,1306 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FITNESS Tees</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=Inter:wght@400;500;600;700&display=swap">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=Inter:wght@400;500;600;700;800&display=swap">
+
 <style>
-  :root {
-    --serif: "EB Garamond", Georgia, "Times New Roman", serif;
-    --sans: "Inter", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
-    --base: #0b6f8c;
-    --fg: #ffffff;
-    --fg-soft: rgba(255,255,255,0.84);
-    --fg-faint: rgba(255,255,255,0.62);
-    --btn-bg: #ffffff;
-    --btn-fg: #101010;
-    --arrow-bg: rgba(0,0,0,0.32);
-    --arrow-fg: #ffffff;
-    --chip-bg: rgba(0,0,0,0.78);
-    --chip-fg: #ffffff;
-    --chip-on-bg: #ffffff;
-    --chip-on-fg: #0b0b0b;
-    --line: rgba(255,255,255,0.28);
-    color-scheme: dark;
+:root{
+  --serif:"EB Garamond",Georgia,serif;
+  --sans:"Inter",system-ui,sans-serif;
+  --base:#0b6f8c;
+  --fg:#fff;
+  --soft:rgba(255,255,255,.84);
+  --faint:rgba(255,255,255,.62);
+  --btn:#fff;
+  --btnText:#101010;
+  --line:rgba(255,255,255,.28);
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html,body{
+  min-height:100%;
+}
+
+body{
+  background:var(--base);
+  color:var(--fg);
+  font-family:var(--sans);
+  transition:background .7s ease,color .5s ease;
+  overflow-x:hidden;
+}
+
+button{
+  font:inherit;
+  border:0;
+  cursor:pointer;
+}
+
+a{
+  color:inherit;
+}
+
+.bg{
+  position:fixed;
+  inset:0;
+  opacity:0;
+  transition:opacity .7s ease;
+  z-index:-2;
+}
+
+.bg.on{
+  opacity:1;
+}
+
+.app{
+  width:min(1280px,100%);
+  min-height:100vh;
+  margin:auto;
+  padding:18px 20px 22px;
+  display:grid;
+  grid-template-rows:auto 1fr auto;
+}
+
+/* NAV */
+
+nav{
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+  gap:16px;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  text-decoration:none;
+}
+
+.logo svg{
+  width:30px;
+  height:30px;
+}
+
+.logo span{
+  font-size:15px;
+  font-weight:800;
+  letter-spacing:.16em;
+}
+
+.nav-links{
+  display:flex;
+  gap:6px;
+  list-style:none;
+}
+
+.nav-links a{
+  display:block;
+  padding:7px 13px;
+  border-radius:7px;
+  text-decoration:none;
+  font-size:14px;
+  transition:.2s;
+}
+
+.nav-links a:hover{
+  opacity:.7;
+}
+
+.nav-links a.active{
+  background:var(--btn);
+  color:var(--btnText);
+  font-weight:700;
+}
+
+.nav-order{
+  justify-self:end;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:9px 16px;
+  border:1px solid var(--line);
+  border-radius:999px;
+  text-decoration:none;
+  font-size:13px;
+  font-weight:600;
+  transition:.2s;
+}
+
+.nav-order:hover{
+  background:var(--btn);
+  color:var(--btnText);
+}
+
+/* MAIN */
+
+.stage{
+  display:grid;
+  grid-template-columns:1fr minmax(260px,360px) 1fr;
+  align-items:center;
+  gap:35px;
+  padding:20px 0;
+}
+
+.copy{
+  max-width:400px;
+}
+
+h1{
+  font-family:var(--serif);
+  font-size:clamp(36px,4vw,56px);
+  font-weight:400;
+  line-height:1.08;
+  margin-bottom:18px;
+}
+
+.lede{
+  max-width:330px;
+  color:var(--soft);
+  font-size:14px;
+  line-height:1.7;
+}
+
+.trust{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px 18px;
+  list-style:none;
+  margin-top:25px;
+}
+
+.trust li{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  font-size:12px;
+  color:var(--soft);
+}
+
+.trust svg{
+  width:14px;
+  height:14px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:2.4;
+}
+
+/* PRODUCT */
+
+.photo-col{
+  display:grid;
+  justify-items:center;
+  touch-action:pan-y;
+}
+
+.photo{
+  position:relative;
+  width:min(100%,340px,34vh);
+  aspect-ratio:2000/2912;
+}
+
+.photo img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:22px;
+  opacity:0;
+  background:rgba(0,0,0,.15);
+  box-shadow:
+    0 30px 60px rgba(0,0,0,.38),
+    0 0 0 1px rgba(255,255,255,.14);
+
+  transform:translate(-60vw,-60vh) scale(.8) rotate(-8deg);
+
+  transition:
+    transform .85s cubic-bezier(.22,.8,.24,1),
+    opacity .6s ease;
+}
+
+.photo img.on{
+  opacity:1;
+  transform:none;
+  z-index:2;
+}
+
+.photo img.pos-br{
+  transform:translate(60vw,60vh) scale(.8) rotate(8deg);
+}
+
+.photo img.snap{
+  transition:none!important;
+}
+
+/* ARROWS */
+
+.arrows{
+  width:min(100%,340px);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-top:18px;
+}
+
+.arrow{
+  width:38px;
+  height:38px;
+  display:grid;
+  place-items:center;
+  border-radius:11px;
+  background:rgba(0,0,0,.32);
+  color:#fff;
+  transition:.2s;
+}
+
+.arrow:hover{
+  transform:scale(1.08);
+}
+
+.arrow svg{
+  width:18px;
+  height:18px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:2;
+}
+
+.counter{
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:.14em;
+  color:var(--soft);
+}
+
+/* SIZES */
+
+.size-label{
+  margin:20px 0 10px;
+  font-size:12px;
+  text-align:center;
+  color:var(--soft);
+}
+
+.sizes{
+  display:flex;
+  justify-content:center;
+  gap:9px;
+}
+
+.chip{
+  min-width:42px;
+  height:40px;
+  padding:0 9px;
+  border-radius:999px;
+  background:rgba(0,0,0,.72);
+  color:#fff;
+  font-size:11px;
+  font-weight:700;
+  transition:.2s;
+}
+
+.chip:hover{
+  transform:scale(1.08);
+}
+
+.chip.selected{
+  background:#fff;
+  color:#111;
+}
+
+/* BUTTON */
+
+.cta{
+  width:min(100%,340px);
+  margin-top:17px;
+  padding:14px 22px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:10px;
+  border-radius:999px;
+  background:var(--btn);
+  color:var(--btnText);
+  text-decoration:none;
+  font-size:14px;
+  font-weight:700;
+  box-shadow:0 10px 24px rgba(0,0,0,.22);
+  transition:.25s;
+}
+
+.cta:hover{
+  transform:translateY(-2px);
+}
+
+.cta svg{
+  width:20px;
+  height:20px;
+}
+
+.cta-note{
+  margin-top:10px;
+  font-size:11px;
+  color:var(--soft);
+  text-align:center;
+}
+
+/* DESKTOP INFO */
+
+.buy{
+  justify-self:end;
+  text-align:right;
+}
+
+.design{
+  font-family:var(--serif);
+  font-size:28px;
+  font-weight:400;
+}
+
+.kind{
+  margin-top:5px;
+  margin-bottom:17px;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--faint);
+}
+
+.price{
+  font-size:40px;
+  font-weight:700;
+}
+
+.price small{
+  font-size:20px;
+  margin-right:5px;
+}
+
+/* FOOTER */
+
+.foot{
+  display:grid;
+  grid-template-columns:1fr minmax(260px,360px) 1fr;
+  align-items:end;
+  gap:30px;
+}
+
+.contact b{
+  display:block;
+  margin-bottom:4px;
+  font-size:10px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--faint);
+}
+
+.contact a{
+  font-size:15px;
+  font-weight:700;
+  text-decoration:none;
+}
+
+.tagline{
+  font-family:var(--serif);
+  text-align:center;
+  font-size:25px;
+  line-height:1.25;
+}
+
+.thumb-col{
+  justify-self:end;
+}
+
+.thumb{
+  width:62px;
+  height:84px;
+  overflow:hidden;
+  border-radius:12px;
+  background:none;
+  box-shadow:
+    0 8px 20px rgba(0,0,0,.3),
+    0 0 0 1px rgba(255,255,255,.18);
+}
+
+.thumb img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* ANIMATED BACKGROUND */
+
+.animated-bg{
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  overflow:hidden;
+  pointer-events:none;
+}
+
+.glow{
+  position:absolute;
+  border-radius:50%;
+  background:#fff;
+  filter:blur(80px);
+  opacity:.2;
+}
+
+.glow1{
+  width:400px;
+  height:400px;
+  top:-180px;
+  left:-100px;
+  animation:g1 12s ease-in-out infinite alternate;
+}
+
+.glow2{
+  width:500px;
+  height:500px;
+  right:-180px;
+  top:20%;
+  animation:g2 15s ease-in-out infinite alternate;
+}
+
+.glow3{
+  width:350px;
+  height:350px;
+  bottom:-150px;
+  left:30%;
+  animation:g3 11s ease-in-out infinite alternate;
+}
+
+.shape{
+  position:absolute;
+  border:1px solid rgba(255,255,255,.1);
+  background:rgba(255,255,255,.04);
+  backdrop-filter:blur(3px);
+}
+
+.shape1{
+  width:170px;
+  height:170px;
+  top:20%;
+  left:7%;
+  border-radius:40px;
+  animation:s1 16s ease-in-out infinite;
+}
+
+.shape2{
+  width:110px;
+  height:110px;
+  right:10%;
+  bottom:17%;
+  border-radius:50%;
+  animation:s2 13s ease-in-out infinite;
+}
+
+@keyframes g1{
+  to{transform:translate(130px,150px) scale(1.15)}
+}
+
+@keyframes g2{
+  to{transform:translate(-100px,80px) scale(1.15)}
+}
+
+@keyframes g3{
+  to{transform:translate(100px,-80px) scale(1.15)}
+}
+
+@keyframes s1{
+  0%,100%{transform:translate(0) rotate(20deg)}
+  50%{transform:translate(70px,-50px) rotate(70deg)}
+}
+
+@keyframes s2{
+  0%,100%{transform:translate(0)}
+  50%{transform:translate(-70px,-50px) scale(1.2)}
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+  .app{
+    padding:14px 16px 20px;
   }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html, body { height: 100%; }
-  body {
-    background: var(--base);
-    color: var(--fg);
-    font-family: var(--sans);
-    padding-left: max(16px, env(safe-area-inset-left, 0px));
-    padding-right: max(16px, env(safe-area-inset-right, 0px));
-    transition: color 0.5s ease;
+
+  nav{
+    grid-template-columns:1fr auto;
   }
-  button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
-  a { color: inherit; }
-  .bg { position: fixed; inset: 0; opacity: 0; transition: opacity 0.7s ease; z-index: 0; pointer-events: none; }
-  .bg.on { opacity: 1; }
-  .app {
-    position: relative; z-index: 1; max-width: 1280px; margin: 0 auto; min-height: 100%;
-    display: grid; grid-template-rows: auto 1fr auto;
-    padding-block: calc(18px + env(safe-area-inset-top, 0px)) calc(22px + env(safe-area-inset-bottom, 0px));
+
+  .nav-links{
+    grid-column:1/-1;
+    justify-content:center;
+    overflow-x:auto;
+    order:3;
   }
-  nav { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 16px; padding: 6px 2%; }
-  .logo { display: flex; align-items: center; gap: 8px; text-decoration: none; justify-self: start; }
-  .logo svg { width: 30px; height: 30px; flex: none; }
-  .logo span { font-weight: 800; letter-spacing: 0.16em; font-size: 15px; }
-  .nav-links { display: flex; gap: 6px; list-style: none; align-items: center; }
-  .nav-links a { display: block; text-decoration: none; font-size: 15px; font-weight: 500; padding: 4px 14px; border-radius: 6px; transition: opacity 0.2s; }
-  .nav-links a:hover { opacity: 0.7; }
-  .nav-links a[aria-current="page"] { background: var(--btn-bg); color: var(--btn-fg); font-weight: 600; }
-  .nav-order { justify-self: end; display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border: 1px solid var(--line); border-radius: 999px; font-size: 13px; font-weight: 600; text-decoration: none; transition: background 0.2s, color 0.2s; }
-  .nav-order:hover { background: var(--btn-bg); color: var(--btn-fg); }
-  .nav-order svg { width: 16px; height: 16px; }
-  .stage { display: grid; grid-template-columns: 1fr minmax(260px, 360px) 1fr; align-items: center; gap: 28px; padding: 10px 2%; }
-  .copy { min-width: 0; max-width: 400px; }
-  h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(34px, 3.6vw, 54px); lin
+
+  .nav-links a{
+    white-space:nowrap;
+    font-size:13px;
+  }
+
+  .stage{
+    grid-template-columns:1fr;
+    gap:20px;
+    text-align:center;
+  }
+
+  .copy{
+    order:2;
+    margin:auto;
+  }
+
+  .photo-col{
+    order:1;
+    width:100%;
+    max-width:420px;
+    margin:auto;
+  }
+
+  .buy{
+    display:none;
+  }
+
+  .lede{
+    margin:auto;
+  }
+
+  .trust{
+    justify-content:center;
+  }
+
+  .foot{
+    grid-template-columns:1fr;
+    justify-items:center;
+    text-align:center;
+    gap:20px;
+  }
+
+  .thumb-col{
+    display:none;
+  }
+}
+
+@media(max-width:500px){
+
+  h1{
+    font-size:39px;
+  }
+
+  .logo span{
+    font-size:13px;
+  }
+
+  .nav-order{
+    padding:8px 12px;
+  }
+
+  .photo{
+    width:min(78vw,310px);
+  }
+
+}
+</style>
+</head>
+
+<body>
+
+<div id="bgLayers"></div>
+
+<div class="animated-bg">
+  <span class="glow glow1"></span>
+  <span class="glow glow2"></span>
+  <span class="glow glow3"></span>
+
+  <span class="shape shape1"></span>
+  <span class="shape shape2"></span>
+</div>
+
+
+<div class="app">
+
+<!-- NAV -->
+
+<nav>
+
+<a class="logo" href="#">
+<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+<path d="M16 11V9.5a2.5 2.5 0 1 1 2.5 2.5"/>
+<path d="M16 11L4 21c-1 .9-.4 2.5 1 2.5h22c1.4 0 2-1.6 1-2.5L16 11z"/>
+</svg>
+
+<span>FITNESS</span>
+</a>
+
+
+<ul class="nav-links">
+
+<li><a href="#" class="active">Home</a></li>
+<li><a href="#tshirts">Tshirt</a></li>
+<li><a href="#tshirts">Hoodies</a></li>
+<li><a href="#tshirts">Sweatshirts</a></li>
+<li><a href="#about">About Us</a></li>
+
+</ul>
+
+
+<a class="nav-order" id="navOrder" href="#" target="_blank">
+
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<path d="M4 20l1.4-4.2A8 8 0 1 1 8.3 18.7L4 20z"/>
+</svg>
+
+Order now
+
+</a>
+
+</nav>
+
+
+<!-- MAIN -->
+
+<main class="stage" id="tshirts">
+
+<section class="copy">
+
+<h1>
+Wear Confidence<br>
+Define Your Style.
+</h1>
+
+<p class="lede">
+Bold graphic tees designed for comfort,
+quality, and everyday expression. Pick a
+design, choose your size, and order in one tap.
+</p>
+
+
+<ul class="trust">
+
+<li>
+<svg viewBox="0 0 16 16">
+<path d="M3 8.5l3.2 3L13 4.5"/>
+</svg>
+Premium cotton
+</li>
+
+<li>
+<svg viewBox="0 0 16 16">
+<path d="M3 8.5l3.2 3L13 4.5"/>
+</svg>
+Oversized fit
+</li>
+
+<li>
+<svg viewBox="0 0 16 16">
+<path d="M3 8.5l3.2 3L13 4.5"/>
+</svg>
+Fast shipping
+</li>
+
+<li>
+<svg viewBox="0 0 16 16">
+<path d="M3 8.5l3.2 3L13 4.5"/>
+</svg>
+Easy returns
+</li>
+
+</ul>
+
+</section>
+
+
+<!-- SHIRT -->
+
+<section class="photo-col">
+
+<div class="photo" id="photo"></div>
+
+
+<div class="arrows">
+
+<button class="arrow" id="prevBtn" type="button">
+
+<svg viewBox="0 0 24 24">
+<path d="M15 5l-7 7 7 7"/>
+</svg>
+
+</button>
+
+
+<span class="counter" id="counter">
+1 / 6
+</span>
+
+
+<button class="arrow" id="nextBtn" type="button">
+
+<svg viewBox="0 0 24 24">
+<path d="M9 5l7 7-7 7"/>
+</svg>
+
+</button>
+
+</div>
+
+
+<p class="size-label">
+Choose your size
+</p>
+
+
+<div class="sizes">
+
+<button class="chip selected" data-size="XL">
+XL
+</button>
+
+<button class="chip" data-size="2XL">
+2XL
+</button>
+
+<button class="chip" data-size="3XL">
+3XL
+</button>
+
+<button class="chip" data-size="4XL">
+4XL
+</button>
+
+</div>
+
+
+<a class="cta" id="buyBtn" href="#" target="_blank">
+
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<path d="M4 20l1.4-4.2A8 8 0 1 1 8.3 18.7L4 20z"/>
+<circle cx="8.8" cy="12" r=".6" fill="currentColor"/>
+<circle cx="12" cy="12" r=".6" fill="currentColor"/>
+<circle cx="15.2" cy="12" r=".6" fill="currentColor"/>
+</svg>
+
+Order on WhatsApp
+
+</a>
+
+<p class="cta-note">
+Opens WhatsApp with your design and size filled in.
+</p>
+
+</section>
+
+
+<!-- PRODUCT INFO -->
+
+<section class="buy">
+
+<h2 class="design" id="designName">
+Lime Grinch
+</h2>
+
+<p class="kind">
+Oversized tee
+</p>
+
+<div class="price">
+<small>KSh</small>800
+</div>
+
+</section>
+
+</main>
+
+
+<footer class="foot" id="about">
+
+<div class="contact">
+
+<b>Order by WhatsApp</b>
+
+<a href="https://wa.me/254743216915" target="_blank">
+0743 216 915
+</a>
+
+</div>
+
+
+<div>
+
+<p class="tagline">
+Dress Better.<br>
+Feel Better.
+</p>
+
+</div>
+
+
+<div class="thumb-col">
+
+<button class="thumb" id="thumbBtn">
+
+<img id="thumbImg" src="" alt="Next design">
+
+</button>
+
+</div>
+
+</footer>
+
+</div>
+
+
+<script>
+
+/* =========================
+   YOUR SETTINGS
+========================= */
+
+const WHATSAPP="254743216915";
+
+const PRICE="KSh 800";
+
+
+/* =========================
+   YOUR 6 SHIRTS
+
+   IMPORTANT:
+   These files must be in the
+   SAME folder as index.html.
+========================= */
+
+const tees=[
+
+{
+name:"Lime Grinch",
+slug:"lime-grinch",
+file:"lime-grinch.jpg",
+mode:"light",
+bg:["#d7f34d","#9fc61e","#4f6d0a"]
+},
+
+{
+name:"Orange Lazy",
+slug:"orange-lazy",
+file:"orange-lazy.jpg",
+mode:"dark",
+bg:["#f4631a","#c03a07","#651d02"]
+},
+
+{
+name:"Red Happy Dog",
+slug:"red-happy-dog",
+file:"red-happy-dog.jpg",
+mode:"dark",
+bg:["#ef4444","#991b1b","#450a0a"]
+},
+
+{
+name:"White Mood Off",
+slug:"white-mood-off",
+file:"white-mood-off.jpg",
+mode:"light",
+bg:["#eeeeee","#bbbbbb","#666666"]
+},
+
+{
+name:"White Palm",
+slug:"white-palm",
+file:"white-palm.jpg",
+mode:"light",
+bg:["#e8f5e9","#81c784","#2e7d32"]
+},
+
+{
+name:"Yellow Sponge",
+slug:"yellow-sponge",
+file:"yellow-sponge.jpg",
+mode:"light",
+bg:["#fff176","#fbc02d","#f57f17"]
+}
+
+];
+
+
+/* =========================
+   CREATE BACKGROUNDS
+========================= */
+
+const root=document.documentElement;
+
+const layers=document.getElementById("bgLayers");
+
+const photo=document.getElementById("photo");
+
+
+tees.forEach((tee,i)=>{
+
+const bg=document.createElement("div");
+
+bg.className="bg";
+
+bg.style.background=
+`radial-gradient(
+ellipse 75% 85% at 50% 45%,
+${tee.bg[0]} 0%,
+${tee.bg[1]} 52%,
+${tee.bg[2]} 100%
+)`;
+
+layers.appendChild(bg);
+
+
+const img=document.createElement("img");
+
+img.src=tee.file;
+
+img.alt=tee.name;
+
+img.loading="eager";
+
+photo.appendChild(img);
+
+});
+
+
+const bgEls=layers.querySelectorAll(".bg");
+
+const imgEls=photo.querySelectorAll("img");
+
+
+/* =========================
+   STATE
+========================= */
+
+let index=0;
+
+let selectedSize="XL";
+
+let moving=false;
+
+
+/* =========================
+   WHATSAPP LINK
+========================= */
+
+function getWhatsAppLink(){
+
+const tee=tees[index];
+
+const message=
+`Hi FITNESS, I'd like to order the ${tee.name} tee, size ${selectedSize}, at ${PRICE}.
+
+Design: ${tee.name}`;
+
+return "https://wa.me/"
++WHATSAPP
++"?text="
++encodeURIComponent(message);
+
+}
+
+
+/* =========================
+   UPDATE PAGE
+========================= */
+
+function render(){
+
+const tee=tees[index];
+
+const next=tees[
+(index+1)%tees.length
+];
+
+
+root.style.setProperty(
+"--base",
+tee.bg[1]
+);
+
+
+if(tee.mode==="light"){
+
+root.style.setProperty("--fg","#0d1405");
+root.style.setProperty("--soft","rgba(13,20,5,.82)");
+root.style.setProperty("--faint","rgba(13,20,5,.62)");
+root.style.setProperty("--btn","#0d1405");
+root.style.setProperty("--btnText","#fff");
+root.style.setProperty("--line","rgba(13,20,5,.34)");
+
+}else{
+
+root.style.setProperty("--fg","#fff");
+root.style.setProperty("--soft","rgba(255,255,255,.84)");
+root.style.setProperty("--faint","rgba(255,255,255,.62)");
+root.style.setProperty("--btn","#fff");
+root.style.setProperty("--btnText","#101010");
+root.style.setProperty("--line","rgba(255,255,255,.28)");
+
+}
+
+
+bgEls.forEach((bg,i)=>{
+
+bg.classList.toggle(
+"on",
+i===index
+);
+
+});
+
+
+imgEls.forEach((img,i)=>{
+
+img.setAttribute(
+"aria-hidden",
+String(i!==index)
+);
+
+});
+
+
+document.getElementById(
+"designName"
+).textContent=tee.name;
+
+
+document.getElementById(
+"counter"
+).textContent=
+(index+1)+" / "+tees.length;
+
+
+document.getElementById(
+"thumbImg"
+).src=next.file;
+
+
+document.getElementById(
+"buyBtn"
+).href=getWhatsAppLink();
+
+
+document.getElementById(
+"navOrder"
+).href=getWhatsAppLink();
+
+}
+
+
+/* =========================
+   CHANGE DESIGN
+========================= */
+
+function changeDesign(direction){
+
+if(moving)return;
+
+moving=true;
+
+
+const oldIndex=index;
+
+
+index=
+(index+direction+tees.length)
+%tees.length;
+
+
+const oldImg=imgEls[oldIndex];
+
+const newImg=imgEls[index];
+
+
+if(direction>0){
+
+oldImg.classList.remove("on");
+
+oldImg.classList.add("pos-br");
+
+newImg.classList.add("on");
+
+}else{
+
+newImg.classList.add("pos-br");
+
+newImg.offsetWidth;
+
+oldImg.classList.remove("on");
+
+newImg.classList.remove("pos-br");
+
+newImg.classList.add("on");
+
+}
+
+
+render();
+
+
+setTimeout(()=>{
+
+imgEls.forEach(img=>{
+
+if(!img.classList.contains("on")){
+
+img.classList.remove("pos-br");
+
+}
+
+});
+
+moving=false;
+
+},900);
+
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+document.getElementById(
+"nextBtn"
+).addEventListener(
+"click",
+()=>changeDesign(1)
+);
+
+
+document.getElementById(
+"prevBtn"
+).addEventListener(
+"click",
+()=>changeDesign(-1)
+);
+
+
+document.getElementById(
+"thumbBtn"
+).addEventListener(
+"click",
+()=>changeDesign(1)
+);
+
+
+/* =========================
+   KEYBOARD
+========================= */
+
+document.addEventListener(
+"keydown",
+event=>{
+
+if(event.key==="ArrowRight")
+changeDesign(1);
+
+if(event.key==="ArrowLeft")
+changeDesign(-1);
+
+}
+);
+
+
+/* =========================
+   MOBILE SWIPE
+========================= */
+
+let startX=null;
+
+photo.addEventListener(
+"touchstart",
+event=>{
+
+startX=
+event.touches[0].clientX;
+
+},
+{passive:true}
+);
+
+
+photo.addEventListener(
+"touchend",
+event=>{
+
+if(startX===null)return;
+
+const distance=
+event.changedTouches[0].clientX-startX;
+
+startX=null;
+
+
+if(Math.abs(distance)>40){
+
+changeDesign(
+distance<0?1:-1
+);
+
+}
+
+},
+{passive:true}
+);
+
+
+/* =========================
+   SIZE BUTTONS
+========================= */
+
+document
+.querySelectorAll(".chip")
+.forEach(button=>{
+
+button.addEventListener(
+"click",
+()=>{
+
+selectedSize=
+button.dataset.size;
+
+
+document
+.querySelectorAll(".chip")
+.forEach(b=>{
+
+b.classList.remove("selected");
+
+});
+
+
+button.classList.add("selected");
+
+
+render();
+
+}
+
+});
+
+
+/* =========================
+   START WEBSITE
+========================= */
+
+render();
+
+
+imgEls[0].classList.add("on");
+
+</script>
+
+</body>
+</html>
