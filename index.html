@@ -1,90 +1,101 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FITNESS | T-Shirt Store</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>FITNESS Tees</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=Inter:wght@400;500;600;700&display=swap">
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Arial,sans-serif;background:#0b0b0b;color:white}
-header{padding:20px;display:flex;justify-content:space-between;border-bottom:1px solid #333}
-.logo{font-size:27px;font-weight:900;letter-spacing:2px}
-.logo span{color:#a6ff00}
-header a{color:white;text-decoration:none}
-.hero{text-align:center;padding:65px 20px;background:#151515}
-.hero p{color:#a6ff00;letter-spacing:3px;margin-bottom:15px}
-.hero h1{font-size:48px;margin-bottom:18px}
-.hero h1 span{color:#a6ff00}
-.hero .intro{color:#ccc;line-height:1.7;margin-bottom:25px}
-.btn{display:inline-block;background:#a6ff00;color:#111;padding:14px 20px;text-decoration:none;font-weight:bold;border-radius:4px}
-section{padding:40px 16px}
-.section-title{text-align:center;font-size:28px;margin-bottom:10px}
-.sub{text-align:center;color:#aaa;margin-bottom:25px}
-.products{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.product{background:#191919;border:1px solid #333;border-radius:7px;overflow:hidden}
-.product img{width:100%;aspect-ratio:3/4;object-fit:cover;display:block}
-.product-info{padding:12px}
-.product h3{font-size:15px;margin-bottom:10px}
-.price{color:#a6ff00;font-weight:bold;margin-bottom:12px}
-.order{display:block;text-align:center;background:#a6ff00;color:#111;padding:10px 3px;text-decoration:none;font-size:12px;font-weight:bold;border-radius:4px}
-.about{text-align:center;background:#151515;line-height:1.8}
-.about p{color:#ccc;margin:15px 0 25px}
-footer{text-align:center;padding:25px;color:#aaa;font-size:13px}
-@media(min-width:700px){.products{grid-template-columns:repeat(4,minmax(0,1fr))}.hero h1{font-size:70px}}
-</style>
-</head>
-<body>
-<header>
-<div class="logo">FIT<span>NESS</span></div>
-<a href="#shop">SHOP NOW ↗</a>
-</header>
-
-<div class="hero">
-<p>WELCOME TO FITNESS</p>
-<h1>WEAR YOUR<br><span>OWN STYLE.</span></h1>
-<div class="intro">Premium graphic T-shirts for people who stand out.<br>Find your style and order today.</div>
-<a class="btn" href="#shop">EXPLORE COLLECTION</a>
-</div>
-
-<section id="shop">
-<h2 class="section-title">OUR COLLECTION</h2>
-<p class="sub">Find your next favourite T-shirt.</p>
-<div class="products">
-
-<div class="product">
-<img src="https://placehold.co/600x800/202020/ffffff?text=T-SHIRT+1" alt="T-shirt 1">
-<div class="product-info"><h3>Graphic Tee 01</h3><div class="price">KSh 800</div>
-<a class="order" href="https://wa.me/254743216915?text=Hello%20FITNESS%2C%20I%20want%20Graphic%20Tee%2001">ORDER ON WHATSAPP</a></div>
-</div>
-
-<div class="product">
-<img src="https://placehold.co/600x800/202020/ffffff?text=T-SHIRT+2" alt="T-shirt 2">
-<div class="product-info"><h3>Graphic Tee 02</h3><div class="price">KSh 800</div>
-<a class="order" href="https://wa.me/254743216915?text=Hello%20FITNESS%2C%20I%20want%20Graphic%20Tee%2002">ORDER ON WHATSAPP</a></div>
-</div>
-
-<div class="product">
-<img src="https://placehold.co/600x800/202020/ffffff?text=T-SHIRT+3" alt="T-shirt 3">
-<div class="product-info"><h3>Graphic Tee 03</h3><div class="price">KSh 800</div>
-<a class="order" href="https://wa.me/254743216915?text=Hello%20FITNESS%2C%20I%20want%20Graphic%20Tee%2003">ORDER ON WHATSAPP</a></div>
-</div>
-
-<div class="product">
-<img src="https://placehold.co/600x800/202020/ffffff?text=T-SHIRT+4" alt="T-shirt 4">
-<div class="product-info"><h3>Graphic Tee 04</h3><div class="price">KSh 800</div>
-<a class="order" href="https://wa.me/254743216915?text=Hello%20FITNESS%2C%20I%20want%20Graphic%20Tee%2004">ORDER ON WHATSAPP</a></div>
-</div>
-
-</div>
-</section>
-
-<section class="about">
-<h2>ABOUT FITNESS</h2>
-<p>Confidence. Creativity. Your own style.<br>Express yourself through graphic T-shirts.</p>
-<a class="btn" href="https://wa.me/254743216915?text=Hello%20FITNESS%2C%20tell%20me%20about%20your%20T-shirts">CONTACT US</a>
-</section>
-
-<footer>© 2026 FITNESS. All rights reserved.</footer>
-</body>
-</html>
+  :root {
+    --serif: "EB Garamond", Georgia, "Times New Roman", serif;
+    --sans: "Inter", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+    --base: #0b6f8c;
+    --fg: #ffffff;
+    --fg-soft: rgba(255,255,255,0.84);
+    --fg-faint: rgba(255,255,255,0.62);
+    --btn-bg: #ffffff;
+    --btn-fg: #101010;
+    --arrow-bg: rgba(0,0,0,0.32);
+    --arrow-fg: #ffffff;
+    --chip-bg: rgba(0,0,0,0.78);
+    --chip-fg: #ffffff;
+    --chip-on-bg: #ffffff;
+    --chip-on-fg: #0b0b0b;
+    --line: rgba(255,255,255,0.28);
+    color-scheme: dark;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    background: var(--base);
+    color: var(--fg);
+    font-family: var(--sans);
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    transition: color 0.5s ease;
+  }
+  button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+  a { color: inherit; }
+  .bg { position: fixed; inset: 0; opacity: 0; transition: opacity 0.7s ease; z-index: 0; pointer-events: none; }
+  .bg.on { opacity: 1; }
+  .app {
+    position: relative; z-index: 1; max-width: 1280px; margin: 0 auto; min-height: 100%;
+    display: grid; grid-template-rows: auto 1fr auto;
+    padding-block: calc(18px + env(safe-area-inset-top, 0px)) calc(22px + env(safe-area-inset-bottom, 0px));
+  }
+  nav { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 16px; padding: 6px 2%; }
+  .logo { display: flex; align-items: center; gap: 8px; text-decoration: none; justify-self: start; }
+  .logo svg { width: 30px; height: 30px; flex: none; }
+  .logo span { font-weight: 800; letter-spacing: 0.16em; font-size: 15px; }
+  .nav-links { display: flex; gap: 6px; list-style: none; align-items: center; }
+  .nav-links a { display: block; text-decoration: none; font-size: 15px; font-weight: 500; padding: 4px 14px; border-radius: 6px; transition: opacity 0.2s; }
+  .nav-links a:hover { opacity: 0.7; }
+  .nav-links a[aria-current="page"] { background: var(--btn-bg); color: var(--btn-fg); font-weight: 600; }
+  .nav-order { justify-self: end; display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border: 1px solid var(--line); border-radius: 999px; font-size: 13px; font-weight: 600; text-decoration: none; transition: background 0.2s, color 0.2s; }
+  .nav-order:hover { background: var(--btn-bg); color: var(--btn-fg); }
+  .nav-order svg { width: 16px; height: 16px; }
+  .stage { display: grid; grid-template-columns: 1fr minmax(260px, 360px) 1fr; align-items: center; gap: 28px; padding: 10px 2%; }
+  .copy { min-width: 0; max-width: 400px; }
+  h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(34px, 3.6vw, 54px); line-height: 1.12; letter-spacing: 0.005em; text-wrap: balance; margin-bottom: 18px; }
+  .lede { font-size: 14px; line-height: 1.65; max-width: 320px; color: var(--fg-soft); margin-bottom: 26px; }
+  .cta { display: inline-flex; align-items: center; gap: 12px; padding: 14px 24px; border-radius: 999px; background: var(--btn-bg); color: var(--btn-fg); font-size: 14px; font-weight: 700; text-decoration: none; box-shadow: 0 10px 24px rgba(0,0,0,0.22); transition: transform 0.25s ease, background 0.5s ease, color 0.5s ease; }
+  .cta:hover { transform: translateY(-2px); }
+  .cta svg { width: 20px; height: 20px; flex: none; }
+  .cta-note { margin-top: 12px; font-size: 12px; color: var(--fg-soft); }
+  .trust { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 26px; }
+  .trust li { display: flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 500; color: var(--fg-soft); }
+  .trust svg { width: 14px; height: 14px; flex: none; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+  .cta:focus-visible, .chip:focus-visible, .arrow:focus-visible, .thumb:focus-visible, .nav-links a:focus-visible, .nav-order:focus-visible, .contact a:focus-visible, .logo:focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; }
+  .photo-col { display: grid; justify-items: center; min-width: 0; touch-action: pan-y; }
+  .photo { position: relative; width: min(100%, 340px, 34vh); aspect-ratio: 2000 / 2912; }
+  .photo img {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 22px;
+    background: rgba(0,0,0,0.2); box-shadow: 0 30px 60px rgba(0,0,0,0.38), 0 0 0 1px rgba(255,255,255,0.14);
+    opacity: 0; z-index: 1; transform: translate(-62vw, -62vh) scale(0.8) rotate(-8deg);
+    transition: transform 0.9s cubic-bezier(0.22, 0.8, 0.24, 1), opacity 0.7s ease;
+  }
+  .photo img.pos-br { transform: translate(62vw, 62vh) scale(0.8) rotate(8deg); }
+  .photo img.on { opacity: 1; transform: none; z-index: 2; }
+  .photo img.snap { transition: none !important; }
+  html.flying, html.flying body { overflow: hidden; }
+  .photo-col .arrows { margin-top: 18px; }
+  .buy { justify-self: end; text-align: right; min-width: 0; }
+  .design { font-family: var(--serif); font-size: clamp(22px, 2vw, 28px); line-height: 1.15; margin-bottom: 6px; }
+  .kind { font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--fg-faint); margin-bottom: 18px; }
+  .price { font-size: clamp(30px, 2.8vw, 40px); font-weight: 700; letter-spacing: -0.01em; }
+  .price small { font-size: 0.5em; font-weight: 600; letter-spacing: 0.04em; margin-right: 6px; }
+  .size-label { font-size: 12px; font-weight: 500; margin: 20px 0 10px; color: var(--fg-soft); text-align: center; }
+  .sizes { display: flex; gap: 10px; justify-content: center; }
+  .caption { display: none; margin-top: 14px; font-family: var(--serif); font-size: 22px; text-align: center; }
+  .caption b { font-family: var(--sans); font-size: 15px; font-weight: 700; margin-left: 8px; }
+  .photo-col .cta { margin-top: 16px; width: min(100%, 340px); justify-content: center; }
+  .photo-col .cta-note { text-align: center; }
+  .chip { min-width: 40px; height: 40px; padding: 0 8px; border-radius: 999px; background: var(--chip-bg); color: var(--chip-fg); font-size: 11px; font-weight: 600; transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease; }
+  .chip:hover { transform: scale(1.08); }
+  .chip[aria-pressed="true"] { background: var(--chip-on-bg); color: var(--chip-on-fg); box-shadow: 0 0 0 2px rgba(0,0,0,0.18); }
+  .foot { display: grid; grid-template-columns: 1fr minmax(260px, 360px) 1fr; align-items: end; gap: 28px; padding: 0 2%; }
+  .contact { font-size: 12px; line-height: 1.6; color: var(--fg-soft); }
+  .contact b { display: block; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--fg-faint); font-weight: 600; margin-bottom: 4px; }
+  .contact a { font-size: 15px; font-weight: 600; color: var(--fg); text-decoration: none; }
+  .contact a:hover { text-decoration: underline; }
+  .center-ctl { display: grid; justify-items: center; gap: 12px; min-width: 0; }
